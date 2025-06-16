@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod/v4';
@@ -34,13 +35,21 @@ export function DriverForm() {
             <div>
                 <label htmlFor='motorista'>Motorista</label>
                 <input {...register('motorista')} id='motorista' className='w-full p-2 border rounded' />
-                {errors.motorista && <p className='text-red-500'>{errors.motorista.message}</p>}
+                {errors.motorista && (
+                    <p className='text-red-500' data-testid='form-field-error'>
+                        {errors.motorista.message}
+                    </p>
+                )}
             </div>
 
             <div>
                 <label htmlFor='cpf'>CPF</label>
                 <input {...register('cpf')} id='cpf' className='w-full p-2 border rounded' />
-                {errors.cpf && <p className='text-red-500'>{errors.cpf.message}</p>}
+                {errors.cpf && (
+                    <p className='text-red-500' data-testid='form-field-error'>
+                        {errors.cpf.message}
+                    </p>
+                )}
             </div>
 
             <div>
@@ -51,7 +60,11 @@ export function DriverForm() {
                     className='w-full p-2 border rounded'
                     placeholder='ABC1234'
                 />
-                {errors.placa && <p className='text-red-500'>{errors.placa.message}</p>}
+                {errors.placa && (
+                    <p className='text-red-500' data-testid='form-field-error'>
+                        {errors.placa.message}
+                    </p>
+                )}
             </div>
 
             <div>
@@ -62,7 +75,11 @@ export function DriverForm() {
                     type='time'
                     className='w-full p-2 border rounded'
                 />
-                {errors.horario && <p className='text-red-500'>{errors.horario.message}</p>}
+                {errors.horario && (
+                    <p className='text-red-500' data-testid='form-field-error'>
+                        {errors.horario.message}
+                    </p>
+                )}
             </div>
 
             <Button type='submit' className='mt-6'>
