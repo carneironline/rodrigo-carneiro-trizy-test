@@ -1,12 +1,4 @@
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Motorista } from '@/mocks/motoristas';
 import { PaginationComponent } from '../pagination';
 import { Trash } from 'lucide-react';

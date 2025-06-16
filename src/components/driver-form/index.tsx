@@ -14,7 +14,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function MotoristaForm() {
+export function DriverForm() {
     const {
         register,
         handleSubmit,

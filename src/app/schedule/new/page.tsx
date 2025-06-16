@@ -1,9 +1,9 @@
-import { MotoristaForm } from '@/components/driver-form';
+import { DriverForm } from '@/components/driver-form';
 
 export default function ScheduleNewPage() {
     return (
         <div>
-            <MotoristaForm />
+            <DriverForm />
         </div>
     );
 }

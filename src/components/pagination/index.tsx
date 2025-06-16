@@ -3,7 +3,6 @@
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
     PaginationLink,
     PaginationNext,
@@ -11,29 +10,19 @@ import {
 } from '@/components/ui/pagination';
 import { useState } from 'react';
 
-type PaginationProps = {
+type PaginationProps<T = unknown> = {
     totalItems?: number;
     itemsPerPage?: number;
     currentPage?: number;
     onPageChange?: (page: number) => void;
     className?: string;
-    data?: any[];
+    data?: T[];
 };
 
-export function PaginationComponent({
-    totalItems = 0,
-    itemsPerPage = 0,
-    onPageChange,
-    className,
-    data = [],
-}: PaginationProps) {
+export function PaginationComponent({ totalItems = 0, itemsPerPage = 0, className }: PaginationProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentItems = data.slice(startIndex, endIndex);
 
     function handleClick(pageNumber: number): void {
         if (pageNumber >= 1 && pageNumber <= totalPages) {
