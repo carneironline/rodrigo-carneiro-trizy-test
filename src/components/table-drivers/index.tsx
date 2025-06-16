@@ -37,7 +37,7 @@ export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDr
                                     variant='ghost'
                                     size='icon'
                                     className='cursor-pointer'
-                                    onClick={() => removeDriver(driver.id)}
+                                    onClick={() => driver.id && removeDriver(driver.id)}
                                 >
                                     <Trash className='h-4' />
                                 </Button>

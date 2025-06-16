@@ -1,5 +1,5 @@
 export interface Motorista {
-    id: string;
+    id?: string;
     motorista: string;
     placa: string;
     horario: string;

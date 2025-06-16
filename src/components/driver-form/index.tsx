@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod/v4';
 import { Button } from '../ui/button';
+import { useDriverStore } from '@/store/useDriver';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/routes/constants';
 
 const schema = z.object({
     motorista: z.string().nonempty('Nome do motorista é obrigatório'),
@@ -16,6 +19,9 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function DriverForm() {
+    const router = useRouter();
+    const { addDriver } = useDriverStore();
+
     const {
         register,
         handleSubmit,
@@ -25,10 +31,11 @@ export function DriverForm() {
         resolver: zodResolver(schema),
     });
 
-    const onSubmit = (data: FormData) => {
-        console.log('Dados enviados:', data);
+    function onSubmit(data: FormData) {
+        addDriver(data);
+        router.push(ROUTES.SCHEDULE_LIST);
         reset();
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='max-w-md mx-auto p-4 space-y-4 rounded shadow'>
