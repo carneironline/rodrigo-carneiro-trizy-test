@@ -6,9 +6,9 @@ import { DriverForm } from './';
 describe('DriverForm', () => {
     it('valida e envia o formulário corretamente', async () => {
         const user = userEvent.setup();
+
         render(<DriverForm />);
 
-        // Preenche os campos corretamente
         await user.type(screen.getByLabelText(/motorista/i), 'John Doe');
         await user.type(screen.getByLabelText(/cpf/i), '12345678901');
         await user.type(screen.getByLabelText(/placa/i), 'ABC1234');
@@ -21,6 +21,7 @@ describe('DriverForm', () => {
 
     it('mostra erros de validação quando campos estão vazios', async () => {
         const user = userEvent.setup();
+
         render(<DriverForm />);
 
         await user.click(screen.getByRole('button', { name: /Enviar/i }));
@@ -30,6 +31,7 @@ describe('DriverForm', () => {
 
     it('mostra erro para CPF inválido', async () => {
         const user = userEvent.setup();
+
         render(<DriverForm />);
 
         await user.type(screen.getByLabelText(/cpf/i), '123');
@@ -40,6 +42,7 @@ describe('DriverForm', () => {
 
     it('mostra erro para placa inválida', async () => {
         const user = userEvent.setup();
+
         render(<DriverForm />);
 
         await user.type(screen.getByLabelText(/placa/i), 'XYZ123');

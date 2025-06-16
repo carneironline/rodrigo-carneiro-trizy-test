@@ -3,6 +3,7 @@ import { Motorista } from '@/mocks/motoristas';
 import { PaginationComponent } from '../pagination';
 import { Trash } from 'lucide-react';
 import { Button } from '../ui/button';
+import { useDriverStore } from '@/store/useDriver';
 
 type TableDriversProps = {
     data: Motorista[];
@@ -11,6 +12,8 @@ type TableDriversProps = {
 };
 
 export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDriversProps) {
+    const { removeDriver } = useDriverStore();
+
     return (
         <>
             <Table>
@@ -23,14 +26,19 @@ export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDr
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.map((motorista) => (
-                        <TableRow key={motorista.motorista}>
-                            <TableCell>{motorista.motorista}</TableCell>
-                            <TableCell>{motorista.cpf}</TableCell>
-                            <TableCell>{motorista.placa}</TableCell>
-                            <TableCell>{motorista.horario}</TableCell>
+                    {data.map((driver) => (
+                        <TableRow key={driver.id}>
+                            <TableCell>{driver.motorista}</TableCell>
+                            <TableCell>{driver.cpf}</TableCell>
+                            <TableCell>{driver.placa}</TableCell>
+                            <TableCell>{driver.horario}</TableCell>
                             <TableCell>
-                                <Button variant='ghost' size='icon' className='cursor-pointer'>
+                                <Button
+                                    variant='ghost'
+                                    size='icon'
+                                    className='cursor-pointer'
+                                    onClick={() => removeDriver(driver.id)}
+                                >
                                     <Trash className='h-4' />
                                 </Button>
                             </TableCell>

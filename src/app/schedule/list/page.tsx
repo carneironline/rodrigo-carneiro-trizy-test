@@ -1,16 +1,18 @@
+'use client';
+
 import { TableDrivers } from '@/components/table-drivers';
-import { MOTORISTAS } from '@/mocks/motoristas';
+import { useDriverStore } from '@/store/useDriver';
 import { paginateArray } from '@/utils/array';
 
 export default function ScheduleListPage() {
+    const { drivers, totalDrivers } = useDriverStore();
     const page = 1;
     const itemsPerPage = 10;
-    const currentItems = paginateArray(MOTORISTAS, page, itemsPerPage);
-    const totalItems = MOTORISTAS.length;
+    const currentItems = paginateArray(drivers, page, itemsPerPage);
 
     return (
         <div>
-            <TableDrivers data={currentItems} totalItems={totalItems} itemsPerPage={itemsPerPage} />
+            <TableDrivers data={currentItems} totalItems={totalDrivers} itemsPerPage={itemsPerPage} />
         </div>
     );
 }
