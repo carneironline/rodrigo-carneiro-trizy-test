@@ -1,9 +1,8 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Motorista } from '@/mocks/motoristas';
 import { PaginationComponent } from '../pagination';
-import { Trash } from 'lucide-react';
-import { Button } from '../ui/button';
-import { useDriverStore } from '@/store/useDriver';
+
+import { DialogDriverTrash } from '../dialog/dialog-driver-trash';
 
 type TableDriversProps = {
     data: Motorista[];
@@ -12,8 +11,6 @@ type TableDriversProps = {
 };
 
 export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDriversProps) {
-    const { removeDriver } = useDriverStore();
-
     return (
         <>
             <Table>
@@ -33,14 +30,7 @@ export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDr
                             <TableCell>{driver.placa}</TableCell>
                             <TableCell>{driver.horario}</TableCell>
                             <TableCell>
-                                <Button
-                                    variant='ghost'
-                                    size='icon'
-                                    className='cursor-pointer'
-                                    onClick={() => driver.id && removeDriver(driver.id)}
-                                >
-                                    <Trash className='h-4' />
-                                </Button>
+                                <DialogDriverTrash driver={driver} />
                             </TableCell>
                         </TableRow>
                     ))}
