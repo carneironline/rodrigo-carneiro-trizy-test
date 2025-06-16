@@ -19,7 +19,12 @@ type PaginationProps<T = unknown> = {
     data?: T[];
 };
 
-export function PaginationComponent({ totalItems = 0, itemsPerPage = 0, className }: PaginationProps) {
+export function PaginationComponent({
+    totalItems = 0,
+    itemsPerPage = 0,
+    className,
+    onPageChange,
+}: PaginationProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -27,6 +32,7 @@ export function PaginationComponent({ totalItems = 0, itemsPerPage = 0, classNam
     function handleClick(pageNumber: number): void {
         if (pageNumber >= 1 && pageNumber <= totalPages) {
             setCurrentPage(pageNumber);
+            onPageChange?.(pageNumber);
         }
     }
 
@@ -49,9 +55,6 @@ export function PaginationComponent({ totalItems = 0, itemsPerPage = 0, classNam
                     </PaginationItem>
                 ))}
 
-                {/* <PaginationItem>
-                    <PaginationEllipsis />
-                </PaginationItem> */}
                 <PaginationItem className='cursor-pointer' onClick={() => handleClick(currentPage + 1)}>
                     <PaginationNext href='#' />
                 </PaginationItem>

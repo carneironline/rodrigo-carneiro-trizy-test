@@ -1,16 +1,16 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Motorista } from '@/mocks/motoristas';
 import { PaginationComponent } from '../pagination';
-
 import { DialogDriverTrash } from '../dialog/dialog-driver-trash';
+import { useDriverStore } from '@/store/useDriver';
+import { paginateArray } from '@/utils/array';
+import { useState } from 'react';
 
-type TableDriversProps = {
-    data: Motorista[];
-    totalItems?: number;
-    itemsPerPage?: number;
-};
+export function TableDrivers() {
+    const { drivers, totalDrivers } = useDriverStore();
+    const [page, setPage] = useState(1);
+    const itemsPerPage = 10;
+    const currentPageItems = paginateArray(drivers, page, itemsPerPage);
 
-export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDriversProps) {
     return (
         <>
             <Table>
@@ -23,7 +23,7 @@ export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDr
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.map((driver) => (
+                    {currentPageItems.map((driver) => (
                         <TableRow key={driver.id}>
                             <TableCell>{driver.motorista}</TableCell>
                             <TableCell>{driver.cpf}</TableCell>
@@ -40,8 +40,9 @@ export function TableDrivers({ data, totalItems = 0, itemsPerPage = 0 }: TableDr
             <PaginationComponent
                 className='pt-10'
                 itemsPerPage={itemsPerPage}
-                totalItems={totalItems}
-                data={data}
+                totalItems={totalDrivers}
+                data={drivers}
+                onPageChange={(newPage) => setPage(newPage)}
             />
         </>
     );
