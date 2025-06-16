@@ -44,7 +44,7 @@ export function PaginationComponent({
 
             <PaginationContent>
                 <PaginationItem className='cursor-pointer' onClick={() => handleClick(currentPage - 1)}>
-                    <PaginationPrevious href='#' />
+                    <PaginationPrevious href='#'>Anterior</PaginationPrevious>
                 </PaginationItem>
 
                 {[...Array(totalPages)].map((_, i) => (
@@ -56,7 +56,7 @@ export function PaginationComponent({
                 ))}
 
                 <PaginationItem className='cursor-pointer' onClick={() => handleClick(currentPage + 1)}>
-                    <PaginationNext href='#' />
+                    <PaginationNext href='#'>Próximo</PaginationNext>
                 </PaginationItem>
             </PaginationContent>
         </Pagination>
