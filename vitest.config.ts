@@ -10,5 +10,20 @@ export default defineConfig({
         alias: {
             '@': path.resolve(__dirname, './src'),
         },
+
+        coverage: {
+            reporter: ['text', 'html', 'json-summary'], // você pode trocar/combinar
+            reportsDirectory: './coverage',
+            include: ['src/**/*.{ts,tsx}'],
+            exclude: [
+                '**/*.test.*',
+                '**/__tests__/**',
+                'src/tests/**',
+                'src/mocks/**',
+                'src/**/page.*',
+                'src/**/layout.*',
+                'src/app/not-found.*',
+            ],
+        },
     },
 });
